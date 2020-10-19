@@ -1,0 +1,13 @@
+﻿  lex.yy.c
+C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(12,1): warning C4005: 'BEGIN': macro redefinition
+lex.yy.c(116): message : see previous definition of 'BEGIN'
+C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(39,1): warning C4005: 'DIV': macro redefinition
+C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(20): message : see previous definition of 'DIV'
+c.lex(16,10): warning C4013: 'comment' undefined; assuming extern returning int
+c.lex(75,29): warning C4013: 'check_type' undefined; assuming extern returning int
+lex.yy.c(1737,46): warning C4013: 'isatty' undefined; assuming extern returning int
+lex.yy.c(1737,48): error C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fileno. See online help for details.
+  SimpleCLexer.c
+C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(39,1): warning C4005: 'DIV': macro redefinition
+C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(20): message : see previous definition of 'DIV'
+  Generating Code...
