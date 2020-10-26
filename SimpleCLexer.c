@@ -61,7 +61,9 @@ const char* lexUnits[] = { "AND",
 							"RBRKT",
 							"LSQBKTLESS",
 							"GREATERRSQBKT",
-							"IDENTIFIER"};
+							"IDENTIFIER",
+							"COMMBEG",
+							"COMMEND"};
 
 int main()
 {

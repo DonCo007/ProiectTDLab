@@ -55,5 +55,7 @@
 #define	LSQBKTLESS 52
 #define GREATERRSQBKT 53
 #define IDENTIFIER 54
+#define COMMBEG 55
+#define COMMEND 56
 
 #endif
