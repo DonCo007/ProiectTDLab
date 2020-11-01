@@ -553,8 +553,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "c.lex"
-#line 9 "c.lex"
+#line 1 "PCAT.lex"
+#line 9 "PCAT.lex"
 #include <stdio.h>
 #include "symbols.h"
 
@@ -777,7 +777,7 @@ YY_DECL
 		}
 
 	{
-#line 15 "c.lex"
+#line 15 "PCAT.lex"
 
 
 #line 783 "lex.yy.c"
@@ -839,324 +839,324 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "c.lex"
+#line 17 "PCAT.lex"
 { count(); return(COMMBEG); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "c.lex"
+#line 18 "PCAT.lex"
 { count(); return(COMMEND); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "c.lex"
+#line 19 "PCAT.lex"
 { count(); return(AND); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "c.lex"
+#line 20 "PCAT.lex"
 { count(); return(ELSEIF); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "c.lex"
+#line 21 "PCAT.lex"
 { count(); return(MOD); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "c.lex"
+#line 22 "PCAT.lex"
 { count(); return(RECORD); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "c.lex"
+#line 23 "PCAT.lex"
 { count(); return(WRITE); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "c.lex"
+#line 24 "PCAT.lex"
 { count(); return(ARRAY); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "c.lex"
+#line 25 "PCAT.lex"
 { count(); return(END); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "c.lex"
+#line 26 "PCAT.lex"
 { count(); return(NOT); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "c.lex"
+#line 27 "PCAT.lex"
 { count(); return(RETURN); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "c.lex"
+#line 28 "PCAT.lex"
 { count(); return(BEGIN); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "c.lex"
+#line 29 "PCAT.lex"
 { count(); return(EXIT); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "c.lex"
+#line 30 "PCAT.lex"
 { count(); return(OF); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "c.lex"
+#line 31 "PCAT.lex"
 { count(); return(THEN); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "c.lex"
+#line 32 "PCAT.lex"
 { count(); return(BY); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 33 "c.lex"
+#line 33 "PCAT.lex"
 { count(); return(FOR); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 34 "c.lex"
+#line 34 "PCAT.lex"
 { count(); return(OR); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 35 "c.lex"
+#line 35 "PCAT.lex"
 { count(); return(TO); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 36 "c.lex"
+#line 36 "PCAT.lex"
 { count(); return(DIV); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 37 "c.lex"
+#line 37 "PCAT.lex"
 { count(); return(IF); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 38 "c.lex"
+#line 38 "PCAT.lex"
 { count(); return(PROCEDURE); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 39 "c.lex"
+#line 39 "PCAT.lex"
 { count(); return(TYPE); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 40 "c.lex"
+#line 40 "PCAT.lex"
 { count(); return(DO); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 41 "c.lex"
+#line 41 "PCAT.lex"
 { count(); return(IS); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 42 "c.lex"
+#line 42 "PCAT.lex"
 { count(); return(PROGRAM); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 43 "c.lex"
+#line 43 "PCAT.lex"
 { count(); return(VAR); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 44 "c.lex"
+#line 44 "PCAT.lex"
 { count(); return(ELSE); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 45 "c.lex"
+#line 45 "PCAT.lex"
 { count(); return(LOOP); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 46 "c.lex"
+#line 46 "PCAT.lex"
 { count(); return(READ); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 47 "c.lex"
+#line 47 "PCAT.lex"
 { count(); return(WHILE); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 50 "c.lex"
+#line 50 "PCAT.lex"
 { count(); return(DOT); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 51 "c.lex"
+#line 51 "PCAT.lex"
 { count(); return(MULT); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 52 "c.lex"
+#line 52 "PCAT.lex"
 { count(); return(ADD); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 53 "c.lex"
+#line 53 "PCAT.lex"
 { count(); return(SUBSTRACT); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 54 "c.lex"
+#line 54 "PCAT.lex"
 { count(); return(DIV); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 55 "c.lex"
+#line 55 "PCAT.lex"
 { count(); return (END_OF_INSTRUCTION);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 57 "c.lex"
+#line 57 "PCAT.lex"
 { count();  return(LESS); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 58 "c.lex"
+#line 58 "PCAT.lex"
 { count();  return(GREATER); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 59 "c.lex"
+#line 59 "PCAT.lex"
 { count();	return(ASSIGN); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 60 "c.lex"
+#line 60 "PCAT.lex"
 { count();  return(LESSEQ); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 61 "c.lex"
+#line 61 "PCAT.lex"
 { count();	return(GREATEREQ); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 62 "c.lex"
+#line 62 "PCAT.lex"
 { count();	return(EQUAL); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 63 "c.lex"
+#line 63 "PCAT.lex"
 { count();	return(DIFF); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 64 "c.lex"
+#line 64 "PCAT.lex"
 { count();	return(COLON); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 65 "c.lex"
+#line 65 "PCAT.lex"
 { count();	return(COMMA); }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 66 "c.lex"
+#line 66 "PCAT.lex"
 { count();	return(LPAREN); }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 67 "c.lex"
+#line 67 "PCAT.lex"
 { count();	return(RPAREN); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 68 "c.lex"
+#line 68 "PCAT.lex"
 { count();	return(LSQBKT); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 69 "c.lex"
+#line 69 "PCAT.lex"
 { count();	return(RSQBKT); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 70 "c.lex"
+#line 70 "PCAT.lex"
 { count();	return(LBRKT); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 71 "c.lex"
+#line 71 "PCAT.lex"
 { count();	return(RBRKT); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 72 "c.lex"
+#line 72 "PCAT.lex"
 { count();	return(LSQBKTLESS); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 73 "c.lex"
+#line 73 "PCAT.lex"
 { count();	return(GREATERRSQBKT); }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 76 "c.lex"
+#line 76 "PCAT.lex"
 { count(); return(check_type()); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 77 "c.lex"
+#line 77 "PCAT.lex"
 { count(); return(CONSTANT); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 78 "c.lex"
+#line 78 "PCAT.lex"
 { count(); return(CONSTANT); }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 79 "c.lex"
+#line 79 "PCAT.lex"
 { count(); return(CONSTANT); }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 80 "c.lex"
+#line 80 "PCAT.lex"
 { count(); return(CONSTANT); }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 81 "c.lex"
+#line 81 "PCAT.lex"
 { count(); return(CONSTANT); }
 	YY_BREAK
 case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
-#line 83 "c.lex"
+#line 83 "PCAT.lex"
 { count(); return(STRING_LITERAL); }
 	YY_BREAK
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 88 "c.lex"
+#line 88 "PCAT.lex"
 { count(); }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 89 "c.lex"
+#line 89 "PCAT.lex"
 { /* ignore bad characters */ }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 91 "c.lex"
+#line 91 "PCAT.lex"
 ECHO;
 	YY_BREAK
 #line 1162 "lex.yy.c"
@@ -2164,7 +2164,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 91 "c.lex"
+#line 91 "PCAT.lex"
 
 
 yywrap()
