@@ -53,6 +53,10 @@
 %token LSQBKTLESS
 %token GREATERRSQBKT
 %token IDENTIFIER
+%token INTEGER
+%token REAL
+%token ID
+%token STRING
 
 %start program
 	
@@ -112,7 +116,7 @@ fp_section
 	: id_list COMMA ID COLON typename
 	;
 
-lvalues
+lvalue
 	: id_list
 	| lvalue LSQBKT expression RSQBKT
 	| lvalue DOT id_list
@@ -163,7 +167,7 @@ array_init
 
 statement
 	: id_list actual_params
-	| lvalue ASSIGN epression END_OF_INSTRUCTION
+	| lvalue ASSIGN expression END_OF_INSTRUCTION
 	| READ LPAREN lvalue COMMA lvalue RPAREN END_OF_INSTRUCTION
 	| WRITE write_params END_OF_INSTRUCTION
 	| WHILE expression DO statement END  END_OF_INSTRUCTION

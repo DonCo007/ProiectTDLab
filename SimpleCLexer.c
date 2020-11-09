@@ -63,7 +63,12 @@ const char* lexUnits[] = { "AND",
                            "GREATERRSQBKT",
                            "IDENTIFIER",
                            "COMMBEG",
-                           "COMMEND"};
+                           "COMMEND",
+                           "IDENTIFIER",
+                           "INTEGER",
+                           "REAL",
+                           "ID",
+                           "STRING"};
 
 int main()
 {
@@ -71,7 +76,7 @@ int main()
 	yyin = fopen("input.csrc", "rt");
 	if (yyin != NULL)
 	{
-		while ((tokenValue = yylex()) != END)
+		while ((tokenValue = yylex()) != EOF)
 		{
 			printf(" -> TOKEN ID: %d; \n", tokenValue);
 		}
