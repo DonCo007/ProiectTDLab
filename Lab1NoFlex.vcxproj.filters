@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="c.lex">
+    <None Include="input.csrc">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="input.csrc">
+    <None Include="PCAT.lex">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="PCATParser.y">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

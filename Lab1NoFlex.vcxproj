@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="c.lex" />
+    <None Include="PCAT.lex" />
     <None Include="input.csrc" />
+    <None Include="PCATParser.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lex.yy.c" />

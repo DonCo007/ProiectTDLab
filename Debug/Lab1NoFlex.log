@@ -1,8 +1,8 @@
-﻿  lex.yy.c
+﻿  SimpleCLexer.c
+  lex.yy.c
 C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(12,1): warning C4005: 'BEGIN': macro redefinition
 lex.yy.c(116): message : see previous definition of 'BEGIN'
-c.lex(76,29): warning C4013: 'check_type' undefined; assuming extern returning int
+PCAT.lex(76,29): warning C4013: 'check_type' undefined; assuming extern returning int
 lex.yy.c(1743,46): warning C4013: 'isatty' undefined; assuming extern returning int
-  SimpleCLexer.c
   Generating Code...
   Lab1NoFlex.vcxproj -> C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\Debug\Lab1NoFlex.exe
