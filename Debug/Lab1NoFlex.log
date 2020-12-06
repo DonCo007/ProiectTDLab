@@ -1,8 +1,23 @@
-﻿  SimpleCLexer.c
+﻿  fct.c
   lex.yy.c
 C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\symbols.h(12,1): warning C4005: 'BEGIN': macro redefinition
 lex.yy.c(116): message : see previous definition of 'BEGIN'
 PCAT.lex(76,29): warning C4013: 'check_type' undefined; assuming extern returning int
 lex.yy.c(1743,46): warning C4013: 'isatty' undefined; assuming extern returning int
+  PCATParser.tab.c
+PCATParser.tab.c(1262,22): warning C4013: 'yylex' undefined; assuming extern returning int
+PCATParser.y(68,92): warning C4013: 'createProgramNode' undefined; assuming extern returning int
+PCATParser.y(72,97): warning C4013: 'createBodyNode' undefined; assuming extern returning int
+PCATParser.y(76,120): warning C4013: 'createDeclarationNode' undefined; assuming extern returning int
+PCATParser.y(82,96): warning C4013: 'createTypeDeclaration' undefined; assuming extern returning int
+PCATParser.y(86,121): warning C4013: 'createTypename' undefined; assuming extern returning int
+PCATParser.y(90,109): warning C4013: 'createType' undefined; assuming extern returning int
+PCATParser.y(95,90): warning C4013: 'createComponent' undefined; assuming extern returning int
+PCATParser.y(100,89): warning C4013: 'createListNode' undefined; assuming extern returning int
+PCATParser.y(101,91): warning C4013: 'addLinkToList' undefined; assuming extern returning int
+PCATParser.y(105,141): warning C4013: 'createProcedureDeclaration' undefined; assuming extern returning int
+PCATParser.y(109,113): warning C4013: 'createFormalParameters' undefined; assuming extern returning int
+PCATParser.tab.c(1487,15): warning C4013: 'yyerror' undefined; assuming extern returning int
+  SimpleCLexer.c
   Generating Code...
   Lab1NoFlex.vcxproj -> C:\Users\Preda Radu\Desktop\Lab1NoFlex\Lab1NoFlex\Debug\Lab1NoFlex.exe

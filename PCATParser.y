@@ -1,6 +1,7 @@
 %{
 #include<stdio.h>
 %}
+
 %token AND
 %token ARRAY
 %token BEGIN
@@ -58,62 +59,64 @@
 %token ID
 %token STRING
 
+
 %start program
 	
 %%
 
 program
-	: PROGRAM IS body END_OF_INSTRUCTION
+	: PROGRAM IS body END_OF_INSTRUCTION			{ $$ = createProgramNode($3); }
 	;
 
 body
-	: declaration BEGIN statement END
+	: declaration BEGIN statement END				{ $$ = createBodyNode($1, $3); }
 	;
 
 declaration
-	: VAR  var_decl 
-	| TYPE type_decl 
-	| PROCEDURE procedure_decl
+	: VAR  var_decl									{ $$ = createDeclarationNode("VAR", $2);}
+	| TYPE type_decl								{ $$ = createDeclarationNode("TYPE", $2);}		
+	| PROCEDURE procedure_decl						{ $$ = createDeclarationNode("PROCEDURE", $2);}
 	;
 
 type_decl
-	: typename IS type END_OF_INSTRUCTION
+	: typename IS type END_OF_INSTRUCTION			{ $$ = createTypeDeclaration($1, "IS", $3);}
 	;
 
 typename
-	: id_list
+	: id_list										{ $$ = createTypename("id_list");}
 	;
 
 type
-	: ARRAY OF typename
-	| RECORD component component END
+	: ARRAY OF typename								{ $$ = createType(NULL, $3);}
+	| RECORD component component END				{ $$ = createType($2, $3);}
 	;
 
 component
-	: id_list COLON typename END_OF_INSTRUCTION
+	: id_list COLON typename END_OF_INSTRUCTION		{ $$ = createComponent("id_list", $3); }
 	;
 
-var_decl
-	: id_list COLON typename ASSIGN expression END_OF_INSTRUCTION
-	| var_decl id_list COLON typename ASSIGN expression END_OF_INSTRUCTION
-	;
 
 id_list
-	: ID
-	| id_list COMMA ID
+	: ID							{ $$ = createListNode("Identifier", $1); }
+	| id_list COMMA ID				{ $$ = $1; addLinkToList($$, $3);}
 	;
 
 procedure_decl
-	: id_list formal_params LSQBKT COLON typename RSQBKT IS body END_OF_INSTRUCTION
+	: id_list formal_params LSQBKT COLON typename RSQBKT IS body END_OF_INSTRUCTION			{ $$ = createProcedureDeclaration($3, $6, $8);}
 	;
 
 formal_params
-	: LPAREN fp_section END_OF_INSTRUCTION fp_section RPAREN
-	| LPAREN RPAREN
+	: LPAREN fp_section END_OF_INSTRUCTION fp_section RPAREN		{ $$ = createFormalParameters($2, $3); }
+	| LPAREN RPAREN													{ $$ = createFormalParameters(NULL, NULL); }
 	;
 
 fp_section
-	: id_list COMMA ID COLON typename
+	: id_list COMMA ID COLON typename					
+	;
+
+var_decl
+	: id_list COLON typename ASSIGN expression END_OF_INSTRUCTION					
+	| var_decl id_list COLON typename ASSIGN expression END_OF_INSTRUCTION			
 	;
 
 lvalue
@@ -191,3 +194,10 @@ write_expr
 	| expression
 	;
 %%
+
+int yyerror(char * s) 
+/* yacc error handler */
+{    
+	printf ( "%s\n", s); 
+	return 0;
+}  

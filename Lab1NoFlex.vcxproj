@@ -24,11 +24,14 @@
     <None Include="PCATParser.y" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="fct.c" />
     <ClCompile Include="lex.yy.c" />
+    <ClCompile Include="PCATParser.tab.c" />
     <ClCompile Include="SimpleCLexer.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="symbols.h" />
+    <ClInclude Include="fct.h" />
+    <ClInclude Include="PCATParser.tab.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

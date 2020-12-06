@@ -2,7 +2,7 @@
 //
 
 #include <stdio.h>
-#include "symbols.h"
+#include "PCATParser.tab.h"
 #include <errno.h>
 
 extern FILE* yyin;
