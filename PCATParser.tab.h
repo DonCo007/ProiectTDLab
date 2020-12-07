@@ -54,69 +54,82 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    AND = 258,                     /* AND  */
-    ARRAY = 259,                   /* ARRAY  */
-    BEGIN = 260,                   /* BEGIN  */
-    BY = 261,                      /* BY  */
-    DIV = 262,                     /* DIV  */
-    DO = 263,                      /* DO  */
-    ELSE = 264,                    /* ELSE  */
-    ELSEIF = 265,                  /* ELSEIF  */
-    END = 266,                     /* END  */
-    EXIT = 267,                    /* EXIT  */
-    FOR = 268,                     /* FOR  */
-    IF = 269,                      /* IF  */
-    IS = 270,                      /* IS  */
+    PROGRAM = 258,                 /* PROGRAM  */
+    PROCEDURE = 259,               /* PROCEDURE  */
+    IS = 260,                      /* IS  */
+    OF = 261,                      /* OF  */
+    BEGINTEST = 262,               /* BEGINTEST  */
+    END = 263,                     /* END  */
+    EXIT = 264,                    /* EXIT  */
+    IF = 265,                      /* IF  */
+    THEN = 266,                    /* THEN  */
+    ELSIF = 267,                   /* ELSIF  */
+    ELSE = 268,                    /* ELSE  */
+    WHILE = 269,                   /* WHILE  */
+    DO = 270,                      /* DO  */
     LOOP = 271,                    /* LOOP  */
-    MOD = 272,                     /* MOD  */
-    NOT = 273,                     /* NOT  */
-    OF = 274,                      /* OF  */
-    OR = 275,                      /* OR  */
-    PROCEDURE = 276,               /* PROCEDURE  */
-    PROGRAM = 277,                 /* PROGRAM  */
-    READ = 278,                    /* READ  */
-    RECORD = 279,                  /* RECORD  */
-    RETURN = 280,                  /* RETURN  */
-    THEN = 281,                    /* THEN  */
-    TO = 282,                      /* TO  */
-    TYPE = 283,                    /* TYPE  */
-    VAR = 284,                     /* VAR  */
-    WHILE = 285,                   /* WHILE  */
-    WRITE = 286,                   /* WRITE  */
-    DOT = 287,                     /* DOT  */
-    MULT = 288,                    /* MULT  */
-    ADD = 289,                     /* ADD  */
-    SUBSTRACT = 290,               /* SUBSTRACT  */
-    END_OF_INSTRUCTION = 291,      /* END_OF_INSTRUCTION  */
-    LESS = 292,                    /* LESS  */
-    GREATER = 293,                 /* GREATER  */
-    ASSIGN = 294,                  /* ASSIGN  */
-    LESSEQ = 295,                  /* LESSEQ  */
-    GREATEREQ = 296,               /* GREATEREQ  */
-    EQUAL = 297,                   /* EQUAL  */
-    DIFF = 298,                    /* DIFF  */
-    COLON = 299,                   /* COLON  */
-    COMMA = 300,                   /* COMMA  */
-    LPAREN = 301,                  /* LPAREN  */
-    RPAREN = 302,                  /* RPAREN  */
-    LSQBKT = 303,                  /* LSQBKT  */
-    RSQBKT = 304,                  /* RSQBKT  */
-    LBRKT = 305,                   /* LBRKT  */
-    RBRKT = 306,                   /* RBRKT  */
-    LSQBKTLESS = 307,              /* LSQBKTLESS  */
-    GREATERRSQBKT = 308,           /* GREATERRSQBKT  */
-    IDENTIFIER = 309,              /* IDENTIFIER  */
-    INTEGER = 310,                 /* INTEGER  */
-    REAL = 311,                    /* REAL  */
-    ID = 312,                      /* ID  */
-    STRING = 313                   /* STRING  */
+    FOR = 272,                     /* FOR  */
+    TO = 273,                      /* TO  */
+    BY = 274,                      /* BY  */
+    RETURN = 275,                  /* RETURN  */
+    RECORD = 276,                  /* RECORD  */
+    TYPE = 277,                    /* TYPE  */
+    ID = 278,                      /* ID  */
+    READ = 279,                    /* READ  */
+    WRITE = 280,                   /* WRITE  */
+    STRING = 281,                  /* STRING  */
+    INTEGER = 282,                 /* INTEGER  */
+    REAL = 283,                    /* REAL  */
+    NOT = 284,                     /* NOT  */
+    VAR = 285,                     /* VAR  */
+    ARRAY = 286,                   /* ARRAY  */
+    MOD = 287,                     /* MOD  */
+    OR_OP = 288,                   /* OR_OP  */
+    ASSIGN = 289,                  /* ASSIGN  */
+    OPEN_SQ_ANGL = 290,            /* OPEN_SQ_ANGL  */
+    CLOSE_SQ_ANGL = 291,           /* CLOSE_SQ_ANGL  */
+    OPEN_BR = 292,                 /* OPEN_BR  */
+    CLOSE_BR = 293,                /* CLOSE_BR  */
+    OPEN_SQUARE = 294,             /* OPEN_SQUARE  */
+    CLOSE_SQUARE = 295,            /* CLOSE_SQUARE  */
+    OPEN_CURLY = 296,              /* OPEN_CURLY  */
+    CLOSE_CURLY = 297,             /* CLOSE_CURLY  */
+    NE_OP = 298,                   /* NE_OP  */
+    GE_OP = 299,                   /* GE_OP  */
+    LE_OP = 300,                   /* LE_OP  */
+    GT_OP = 301,                   /* GT_OP  */
+    LT_OP = 302,                   /* LT_OP  */
+    EQ_OP = 303,                   /* EQ_OP  */
+    ADD = 304,                     /* ADD  */
+    SUB = 305,                     /* SUB  */
+    MUL = 306,                     /* MUL  */
+    DIV = 307,                     /* DIV  */
+    END_OF_INSTRUCTION = 308,      /* END_OF_INSTRUCTION  */
+    COLON = 309,                   /* COLON  */
+    COMMA = 310,                   /* COMMA  */
+    DOT = 311,                     /* DOT  */
+    AND_OP = 312,                  /* AND_OP  */
+    CONSTANT = 313,                /* CONSTANT  */
+    STRING_LITERAL = 314           /* STRING_LITERAL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 12 "PCATParser.y"
+
+	
+	Node* node;
+	char* strings;
+	int intVal;
+
+#line 130 "PCATParser.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

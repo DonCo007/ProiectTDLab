@@ -35,7 +35,7 @@
     <ClCompile Include="PCATParser.tab.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fct.c">
+    <ClCompile Include="ast.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,7 +43,7 @@
     <ClInclude Include="PCATParser.tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fct.h">
+    <ClInclude Include="ast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

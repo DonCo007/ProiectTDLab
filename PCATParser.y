@@ -1,197 +1,272 @@
+
 %{
-#include<stdio.h>
+    #include <stdio.h>
+	#include "ast.h"
+
+Node* astRoot = NULL;
+int yyerror(char * s);
+extern int yylex(void);
+
 %}
 
-%token AND
-%token ARRAY
-%token BEGIN
-%token BY
-%token DIV
-%token DO
-%token ELSE
-%token ELSEIF
-%token END
-%token EXIT
-%token FOR
-%token IF
-%token IS
-%token LOOP
-%token MOD
-%token NOT
-%token OF
-%token OR
-%token PROCEDURE
-%token PROGRAM
-%token READ
-%token RECORD
-%token RETURN
-%token THEN
-%token TO
-%token TYPE
-%token VAR
-%token WHILE
+%union{
+	
+	Node* node;
+	char* strings;
+	int intVal;
+}
+
+%token PROGRAM 
+%token PROCEDURE 
+%token IS 
+%token OF 
+%token BEGINTEST
+%token END 
+%token EXIT 
+%token IF 
+%token THEN 
+%token ELSIF 
+%token ELSE 
+%token WHILE 
+%token DO 
+%token LOOP 
+%token FOR 
+%token TO 
+%token BY 
+%token RETURN 
+%token RECORD 
+%token TYPE 
+%token <strings> ID 
+%token READ 
 %token WRITE
+%token STRING 
+%token INTEGER 
+%token REAL 
+%token NOT 
+%token VAR 
+%token ARRAY
+%token MOD 
+%token OR_OP 
+%token ASSIGN 
+%token OPEN_SQ_ANGL 
+%token CLOSE_SQ_ANGL 
+%token OPEN_BR 
+%token CLOSE_BR 
+%token OPEN_SQUARE 
+%token CLOSE_SQUARE  
+%token OPEN_CURLY 
+%token CLOSE_CURLY
+%token NE_OP 
+%token GE_OP 
+%token LE_OP 
+%token GT_OP 
+%token LT_OP 
+%token EQ_OP
+%token ADD 
+%token SUB 
+%token MUL 
+%token DIV
+%token END_OF_INSTRUCTION 
+%token COLON 
+%token COMMA 
 %token DOT
-%token MULT
-%token ADD
-%token SUBSTRACT
-%token END_OF_INSTRUCTION
-%token LESS
-%token GREATER
-%token ASSIGN
-%token LESSEQ
-%token GREATEREQ
-%token EQUAL
-%token DIFF
-%token COLON
-%token COMMA
-%token LPAREN
-%token RPAREN
-%token LSQBKT
-%token RSQBKT
-%token LBRKT
-%token RBRKT
-%token LSQBKTLESS
-%token GREATERRSQBKT
-%token IDENTIFIER
-%token INTEGER
-%token REAL
-%token ID
-%token STRING
+%token AND_OP
+%token <intVal> CONSTANT
+%token STRING_LITERAL
+
+%type <node> program
+%type <node> body
+%type <node> declaration_list
+%type <node> declaration
+%type <node> ID_list
+%type <node> var-decl
+%type <node> simple_assign
+%type <node> type-decl
+%type <node> procedure-decl
+%type <node> type
+%type <node> typename
+%type <node> component
+%type <node> fp-section_list
+%type <node> formal-params
+%type <node> fp-section
+%type <node> statement_list
+%type <node> statement
+%type <node> write-expr_list
+%type <node> write-params
+%type <node> write-expr 
+%type <node> expression
+%type <node> lvalue_list
+%type <node> lvalue
+%type <node> expression_list
+%type <node> actual-params
+%type <node> ID-expression_list
+%type <node> record-inits
+%type <node> array-init_list
+%type <node> array-inits
+%type <node> array-init
+%type <node> number
+%type <node> unary-op
+%type <node> binary-op
+
 
 
 %start program
-	
+
 %%
 
-program
-	: PROGRAM IS body END_OF_INSTRUCTION			{ $$ = createProgramNode($3); }
+program: PROGRAM IS body END_OF_INSTRUCTION				{ $$ = createProgramNode($3); astRoot = $$; }
+		 ;
+	
+body:  declaration_list  BEGINTEST  statement_list END    { $$ = createBodyNode($1, $3); } 					
+		;
+
+declaration_list: declaration							{ $$ = createListNode("Declaration", $1); }
+				| declaration_list declaration          { $$ = $1; addLinkToList($$, $2);}
+				;
+
+declaration:  
+	| VAR  var-decl										{ $$ = createDeclarationNode("VAR", $2);}			
+	| TYPE  type-decl									{ $$ = createDeclarationNode("TYPE", $2);}
+	| PROCEDURE  procedure-decl							{ $$ = createDeclarationNode("PROCEDURE", $2);}
+	;
+	
+ID_list: ID                                             { $$ = createListNode("Identifier", $1); }
+	     | ID_list COMMA ID								{ $$ = $1; addLinkToList($$, $3);}
+	     ;
+
+var-decl: simple_assign                                 { $$ = createVarDeclaration($1, NULL); }         
+		 | var-decl simple_assign                       { $$ = createVarDeclaration($1, $2); }     
+		;
+
+simple_assign: ID_list ASSIGN expression END_OF_INSTRUCTION       { $$ = createSimpleAssign($1, "ASSIGN", $3); }
+				;
+	
+type-decl: typename IS type END_OF_INSTRUCTION                    { $$ = createTypeDeclaration($1, "IS", $3);}
+		;
+	
+procedure-decl: ID OPEN_BR formal-params CLOSE_BR COLON typename IS body END_OF_INSTRUCTION         { $$ = createProcedureDeclaration($3, $6, $8);}
+		;
+
+type: ARRAY OF typename                                 { $$ = createType(NULL, $3);}                 
+	| RECORD component  component  END                  { $$ = createType($2, $3);}          	
+
+
+typename: ID                                            { $$ = createTypename("ID");} 
+		  ;
+
+component: ID COLON typename END_OF_INSTRUCTION        { $$ = createComponent("ID", $3); } 
+		   ;
+
+fp-section_list: fp-section                                        { $$ = createListNode("FormalParameter", $1); }
+				| fp-section_list fp-section					   { $$ = $1; addLinkToList($$, $2); }
+					;
+
+formal-params: OPEN_BR fp-section fp-section_list CLOSE_BR          { $$ = createFormalParameters($2, $3); }  
+	| OPEN_BR CLOSE_BR                                              { $$ = createFormalParameters(NULL, NULL); }  
 	;
 
-body
-	: declaration BEGIN statement END				{ $$ = createBodyNode($1, $3); }
+fp-section: ID COLON typename                                       { $$ = createFpSection("ID", $3);}  
+			;
+
+statement_list: statement                                          { $$ = createListNode("Statement", $1); }
+				| statement_list statement						   { $$ = $1; addLinkToList($$, $2);}
+				|                                                  { $$ = createStatementList(NULL);}                 
+				;
+
+statement: lvalue ASSIGN expression END_OF_INSTRUCTION									
+	| ID actual-params                                                                  
+	| READ OPEN_BR lvalue lvalue_list CLOSE_BR END_OF_INSTRUCTION                
+	| WRITE write-params END_OF_INSTRUCTION												
+	| IF expression THEN  statement_list												
+	| ELSIF expression THEN  statement_list												
+	| ELSE  statement_list  END END_OF_INSTRUCTION                                      
+	| WHILE expression DO  statement_list  END END_OF_INSTRUCTION                       
+	| LOOP  statement_list  END END_OF_INSTRUCTION                                      
+	| FOR ID ASSIGN expression TO expression DO statement_list END END_OF_INSTRUCTION   
+	| EXIT END_OF_INSTRUCTION                                                           
+	| RETURN expression END_OF_INSTRUCTION												
 	;
 
-declaration
-	: VAR  var_decl									{ $$ = createDeclarationNode("VAR", $2);}
-	| TYPE type_decl								{ $$ = createDeclarationNode("TYPE", $2);}		
-	| PROCEDURE procedure_decl						{ $$ = createDeclarationNode("PROCEDURE", $2);}
+write-expr_list: write-expr                                        
+				 | write-expr_list COMMA write-expr                
+				 ;
+
+write-params: OPEN_BR write-expr_list CLOSE_BR                     
+	| OPEN_BR CLOSE_BR											   
+	| OPEN_BR STRING_LITERAL CLOSE_BR                              
 	;
 
-type_decl
-	: typename IS type END_OF_INSTRUCTION			{ $$ = createTypeDeclaration($1, "IS", $3);}
+write-expr: STRING_LITERAL                                         
+	| expression												   
 	;
 
-typename
-	: id_list										{ $$ = createTypename("id_list");}
+expression: number                                                 
+	| lvalue													   
+	| OPEN_BR expression CLOSE_BR                                  
+	| unary-op expression										   
+	| expression binary-op expression							   
+	| typename actual-params									   
+	| typename record-inits                                        
+	| typename array-inits                                         
 	;
 
-type
-	: ARRAY OF typename								{ $$ = createType(NULL, $3);}
-	| RECORD component component END				{ $$ = createType($2, $3);}
+lvalue_list: lvalue                                               
+			| lvalue_list lvalue                                  
+			;
+
+lvalue: ID                                                        
+	| lvalue OPEN_SQUARE expression CLOSE_SQUARE				  
+	| lvalue DOT ID												  
 	;
 
-component
-	: id_list COLON typename END_OF_INSTRUCTION		{ $$ = createComponent("id_list", $3); }
-	;
+expression_list: expression										  
+					| expression_list expression                  
+					;
 
+actual-params: OPEN_BR expression expression_list CLOSE_BR        
+			  | OPEN_BR CLOSE_BR								  
+			  ;
 
-id_list
-	: ID							{ $$ = createListNode("Identifier", $1); }
-	| id_list COMMA ID				{ $$ = $1; addLinkToList($$, $3);}
-	;
+ID-expression_list: ID ASSIGN expression                          
+					| ID-expression_list ID ASSIGN expression     
+					;
+	
+record-inits: OPEN_CURLY ID ASSIGN expression ID-expression_list CLOSE_CURLY    
+			  ;
 
-procedure_decl
-	: id_list formal_params LSQBKT COLON typename RSQBKT IS body END_OF_INSTRUCTION			{ $$ = createProcedureDeclaration($3, $6, $8);}
-	;
-
-formal_params
-	: LPAREN fp_section END_OF_INSTRUCTION fp_section RPAREN		{ $$ = createFormalParameters($2, $3); }
-	| LPAREN RPAREN													{ $$ = createFormalParameters(NULL, NULL); }
-	;
-
-fp_section
-	: id_list COMMA ID COLON typename					
-	;
-
-var_decl
-	: id_list COLON typename ASSIGN expression END_OF_INSTRUCTION					
-	| var_decl id_list COLON typename ASSIGN expression END_OF_INSTRUCTION			
-	;
-
-lvalue
-	: id_list
-	| lvalue LSQBKT expression RSQBKT
-	| lvalue DOT id_list
-	;
-
-expression
-	: number
-	| lvalue
-	| LPAREN expression RPAREN
-	| unary_op expression
-	| expression binary_op expression
-	| id_list actual_params
-	| id_list record_inits
-	| id_list array_inits
-	;
-
-unary_op
-	: NOT
-	| ADD | SUBSTRACT
-	;
-
-binary_op
-	: OR | AND
-	| ADD | SUBSTRACT | MULT | DIV | MOD
-	| LESS | GREATER | EQUAL | GREATEREQ | LESSEQ | DIFF
-	;
-
-number
-	: INTEGER | REAL
-	;
-
-actual_params
-	: LPAREN expression COMMA expression RPAREN
-	| LPAREN RPAREN
-	;
-
-record_inits
-	: LBRKT id_list ASSIGN expression END_OF_INSTRUCTION id_list ASSIGN expression RBRKT
-	;
-
-array_inits
-	: LSQBKTLESS array_init COMMA array_init GREATERRSQBKT
-	;
-
-array_init
-	: LSQBKT expression OF RSQBKT expression
-	;
-
-statement
-	: id_list actual_params
-	| lvalue ASSIGN expression END_OF_INSTRUCTION
-	| READ LPAREN lvalue COMMA lvalue RPAREN END_OF_INSTRUCTION
-	| WRITE write_params END_OF_INSTRUCTION
-	| WHILE expression DO statement END  END_OF_INSTRUCTION
-	| LOOP statement END END_OF_INSTRUCTION
-	| FOR id_list ASSIGN expression TO expression BY expression
-	  DO statement END END_OF_INSTRUCTION
-	| EXIT END_OF_INSTRUCTION
-	| RETURN expression
-	| IF expression THEN statement
-	  ELSEIF expression THEN statement
-	  ELSE statement END END_OF_INSTRUCTION
-	;
-
-write_params
-	: LPAREN write_expr COMMA write_expr RPAREN
-	| LPAREN RPAREN
-	;
-
-write_expr
-	: STRING
-	| expression
+array-init_list: array-init                                      
+				 | array-init_list COMMA array-init              
+				 ;												 
+																 
+array-inits: OPEN_SQ_ANGL array-init_list CLOSE_SQ_ANGL          
+			 ;													 
+																 
+array-init: expression                                           
+			| array-init OF expression							 
+			;													 
+														 
+number: CONSTANT                                             
+		;												 
+														
+														 
+unary-op: '+'                                                
+	| '-'                                                    
+	| NOT                                                    
+	;													 
+														 
+binary-op: ADD                                               
+	| SUB														 
+	| MUL                                                        
+	| DIV                                                        
+	| MOD                                                        
+	| OR_OP                                                      
+	| AND_OP                                                     
+	| GT_OP                                                      
+	| LT_OP                                                      
+	| EQ_OP                                                      
+ 	| GE_OP                                                      
+	| LE_OP                                                      
+	| NE_OP                                                      
 	;
 %%
 
